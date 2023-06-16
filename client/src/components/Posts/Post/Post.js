@@ -1,5 +1,4 @@
 import React from "react";
-import { v4 as uuidv4 } from 'uuid';
 import {Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -8,7 +7,7 @@ import moment from 'moment';
 
 import useStyles from './styles.js';
 
-const Post = ({ post }) => {
+const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
     return (
         <Card className={classes.card}>
@@ -18,15 +17,18 @@ const Post = ({ post }) => {
                 <Typography variant="body2">{moment(post.createdAt).format('DD/MM/YYYY')}</Typography>
             </div>
             <div className={classes.overlay2}>
-                <Button style={{color: 'white'}} size='small' onClick={() => {}}>
+                <Button style={{color: 'white'}} 
+                size='small' 
+                onClick={() => setCurrentId(post._id)}>
                     <MoreHorizIcon fontSize="medium" />
                 </Button>
             </div>
             <div className={classes.details}>
                 <Typography variant="body2" color='textSecondary'>{post.tags.map((tag) => `#${tag} `)}</Typography>
             </div>
+            <Typography className={classes.title} variant="h5" gutterBottom>{post.title}</Typography>
             <CardContent>
-                <Typography className={classes.title} variant="h5" gutterBottom>{post.message}</Typography>
+                <Typography variant="h6" gutterBottom>{post.message}</Typography>
             </CardContent>
             <CardActions>
                 <Button size="small" color="primary" onClick={() => {}}>
